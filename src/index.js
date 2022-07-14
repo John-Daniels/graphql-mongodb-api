@@ -1,4 +1,6 @@
 const express = require("express")
+const { config } = require("dotenv")
+const cors = require("cors")
 const { ApolloServer } = require("apollo-server-express")
 const {
   ApolloServerPluginLandingPageGraphQLPlayground,
@@ -8,10 +10,12 @@ const {
 const typeDefs = require("./graphql/typeDefs")
 const resolvers = require("./graphql/resolvers")
 
+config()
 require("./db")
 
 const startServer = async () => {
   const app = express()
+  app.use(cors())
 
   const server = new ApolloServer({
     typeDefs,
