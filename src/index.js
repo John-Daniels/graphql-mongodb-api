@@ -1,5 +1,10 @@
 const express = require("express")
 const { ApolloServer, gql } = require("apollo-server-express")
+const {
+  ApolloServerPluginLandingPageGraphQLPlayground,
+  ApolloServerPluginLandingPageDisabled,
+} = require("apollo-server-core")
+
 const typeDefs = require("./graphql/typeDefs")
 const resolvers = require("./graphql/resolvers")
 
@@ -12,6 +17,10 @@ const startServer = async () => {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
+    plugins: [
+      ApolloServerPluginLandingPageGraphQLPlayground({}),
+      ApolloServerPluginLandingPageDisabled(),
+    ],
     // csrfPrevention: true,
     // cache: "bounded",
   })
