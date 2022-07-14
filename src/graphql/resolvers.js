@@ -19,11 +19,21 @@ const resolvers = {
     hello: () => "hello",
     books: async () => await Book.find(),
   },
-
   Mutation: {
-    createBook: async (_, { title, author }) => {
-      const book = new Book({ title, author })
+    createBook: async (_, { title, author, imageUrl, desc, categories }) => {
+      const book = new Book({ title, author, imageUrl, desc, categories })
       return await book.save()
+    },
+    updateBook: async (
+      _,
+      { id, title, author, imageUrl, desc, categories }
+    ) => {
+      const book = await Book.findByIdAndUpdate(
+        id,
+        { title, author, imageUrl, desc, categories },
+        { new: true }
+      )
+      return book
     },
   },
 }

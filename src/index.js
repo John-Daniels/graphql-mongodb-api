@@ -1,5 +1,5 @@
 const express = require("express")
-const { ApolloServer, gql } = require("apollo-server-express")
+const { ApolloServer } = require("apollo-server-express")
 const {
   ApolloServerPluginLandingPageGraphQLPlayground,
   ApolloServerPluginLandingPageDisabled,
@@ -12,7 +12,6 @@ require("./db")
 
 const startServer = async () => {
   const app = express()
-  const port = 4000
 
   const server = new ApolloServer({
     typeDefs,
@@ -30,11 +29,11 @@ const startServer = async () => {
   server.applyMiddleware({ app })
 
   // The `listen` method launches a web server.
-  app.listen({ port: 4000 }, () => {
+  app.listen(process.env.PORT || 4000, () =>
     console.log(
       `🚀  Server ready at http://localhost:4000${server.graphqlPath}`
     )
-  })
+  )
 }
 
 startServer()

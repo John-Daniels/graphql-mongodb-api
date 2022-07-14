@@ -11,6 +11,10 @@ const typeDefs = gql`
     id: ID!
     title: String!
     author: String!
+    imageUrl: String!
+    desc: String!
+    categories: [String!]!
+    createdAt: String!
   }
 
   # The "Query" type is special: it lists all of the available queries that
@@ -22,8 +26,16 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createBook(title: String!, author: String!): Book!
+    createBook(title: String!, author: String!, imageUrl: String!): Book!
+    updateBook(
+      id: String!
+      title: String
+      author: String
+      imageUrl: String
+      desc: String
+      categories: [String!]
+    ): Book!
   }
 `
-
+// https://www.educative.io/cdn-cgi/image/f=auto,fit=cover,w=600/v2api/collection/10370001/5534816884752384/image/4916621335330816
 module.exports = typeDefs
