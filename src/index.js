@@ -17,6 +17,10 @@ const startServer = async () => {
   const app = express()
   app.use(cors())
 
+  app.get("/", (req, res) => {
+    res.send(`Welcome to the api🚀, still working the documentation!`)
+  })
+
   const server = new ApolloServer({
     typeDefs,
     resolvers,
